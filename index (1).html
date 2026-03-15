@@ -1,0 +1,1300 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>منشئ الحقائب التدريبية | مركز ارتقاء</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/pptxgenjs@3.12.0/dist/pptxgen.bundle.js"></script>
+<style>
+  :root {
+    --primary: #0d2137;
+    --secondary: #1e5f8a;
+    --accent: #e8a045;
+    --accent2: #4CAF82;
+    --light: #f0f6fc;
+    --white: #ffffff;
+    --text: #1a2332;
+    --muted: #6b7c93;
+    --border: #d0dce8;
+    --danger: #e05252;
+    --gradient: linear-gradient(135deg, #0d2137 0%, #1e5f8a 60%, #2a7fad 100%);
+    --card-shadow: 0 4px 24px rgba(13,33,55,0.10);
+    --radius: 16px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Tajawal', 'Cairo', sans-serif;
+    background: var(--light);
+    color: var(--text);
+    min-height: 100vh;
+    direction: rtl;
+  }
+
+  /* ─── HEADER ─── */
+  header {
+    background: var(--gradient);
+    padding: 0 2rem;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.18);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .logo-area {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .logo-img {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+    filter: brightness(1.1);
+  }
+
+  .logo-text {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .logo-text span:first-child {
+    font-size: 16px;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: 0.3px;
+  }
+
+  .logo-text span:last-child {
+    font-size: 11px;
+    color: rgba(255,255,255,0.65);
+    font-weight: 400;
+  }
+
+  .header-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 0.5px;
+  }
+
+  /* ─── MAIN LAYOUT ─── */
+  main {
+    max-width: 860px;
+    margin: 2.5rem auto;
+    padding: 0 1.5rem 4rem;
+  }
+
+  /* ─── PROGRESS STEPS ─── */
+  .steps-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    margin-bottom: 2.5rem;
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 1.2rem 1.5rem;
+    box-shadow: var(--card-shadow);
+    overflow-x: auto;
+  }
+
+  .step-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    position: relative;
+    flex: 1;
+    min-width: 70px;
+  }
+
+  .step-item:not(:last-child)::before {
+    content: '';
+    position: absolute;
+    top: 17px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--border);
+    z-index: 0;
+  }
+
+  .step-item.done:not(:last-child)::before,
+  .step-item.active:not(:last-child)::before {
+    background: var(--secondary);
+  }
+
+  .step-circle {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--border);
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 700;
+    position: relative;
+    z-index: 1;
+    transition: all 0.3s;
+  }
+
+  .step-item.active .step-circle {
+    background: var(--secondary);
+    color: white;
+    box-shadow: 0 0 0 4px rgba(30,95,138,0.2);
+  }
+
+  .step-item.done .step-circle {
+    background: var(--accent2);
+    color: white;
+  }
+
+  .step-label {
+    font-size: 11px;
+    color: var(--muted);
+    font-weight: 500;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  .step-item.active .step-label {
+    color: var(--secondary);
+    font-weight: 700;
+  }
+
+  .step-item.done .step-label {
+    color: var(--accent2);
+  }
+
+  /* ─── CARD ─── */
+  .card {
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--card-shadow);
+    padding: 2.4rem 2.8rem;
+    animation: fadeUp 0.4s ease;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 2rem;
+    padding-bottom: 1.2rem;
+    border-bottom: 2px solid var(--light);
+  }
+
+  .card-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    background: linear-gradient(135deg, var(--secondary), #2a7fad);
+    color: white;
+    flex-shrink: 0;
+  }
+
+  .card-header-text h2 {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--primary);
+  }
+
+  .card-header-text p {
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+
+  /* ─── FORM FIELDS ─── */
+  .field {
+    margin-bottom: 1.5rem;
+  }
+
+  .field label {
+    display: block;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 7px;
+  }
+
+  .field label .req {
+    color: var(--danger);
+    margin-right: 3px;
+  }
+
+  .field input,
+  .field textarea,
+  .field select {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    font-family: 'Tajawal', sans-serif;
+    font-size: 15px;
+    color: var(--text);
+    background: #fafcff;
+    transition: border 0.2s, box-shadow 0.2s;
+    direction: rtl;
+    outline: none;
+  }
+
+  .field input:focus,
+  .field textarea:focus,
+  .field select:focus {
+    border-color: var(--secondary);
+    box-shadow: 0 0 0 3px rgba(30,95,138,0.12);
+  }
+
+  .field textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+
+  .field-hint {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 5px;
+  }
+
+  /* ─── ROW GRID ─── */
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  /* ─── RANGE SLIDER ─── */
+  .slides-count-wrap {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .slides-count-wrap input[type=range] {
+    flex: 1;
+    -webkit-appearance: none;
+    height: 6px;
+    border-radius: 3px;
+    background: linear-gradient(to left, var(--secondary) 0%, var(--border) 0%);
+    outline: none;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    cursor: pointer;
+  }
+
+  .slides-count-wrap input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--secondary);
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(30,95,138,0.35);
+    border: 3px solid white;
+  }
+
+  .count-badge {
+    background: var(--secondary);
+    color: white;
+    border-radius: 8px;
+    padding: 6px 16px;
+    font-size: 18px;
+    font-weight: 800;
+    min-width: 52px;
+    text-align: center;
+  }
+
+  /* ─── STYLE CARDS ─── */
+  .style-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+
+  .style-card {
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 10px;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.2s;
+    background: #fafcff;
+  }
+
+  .style-card:hover {
+    border-color: var(--secondary);
+    background: var(--light);
+  }
+
+  .style-card.selected {
+    border-color: var(--secondary);
+    background: rgba(30,95,138,0.07);
+    box-shadow: 0 0 0 3px rgba(30,95,138,0.12);
+  }
+
+  .style-card .style-icon { font-size: 26px; margin-bottom: 6px; }
+  .style-card .style-name { font-size: 13px; font-weight: 700; color: var(--text); }
+  .style-card .style-desc { font-size: 11px; color: var(--muted); margin-top: 3px; }
+
+  /* ─── LANGUAGE SELECTOR ─── */
+  .lang-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+
+  .lang-card {
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 10px;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.2s;
+    background: #fafcff;
+  }
+
+  .lang-card:hover { border-color: var(--secondary); }
+
+  .lang-card.selected {
+    border-color: var(--accent);
+    background: rgba(232,160,69,0.08);
+    box-shadow: 0 0 0 3px rgba(232,160,69,0.15);
+  }
+
+  .lang-flag { font-size: 28px; margin-bottom: 6px; }
+  .lang-name { font-size: 14px; font-weight: 700; color: var(--text); }
+
+  /* ─── REVIEW TABLE ─── */
+  .review-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+
+  .review-table tr:not(:last-child) td {
+    border-bottom: 1px solid var(--light);
+  }
+
+  .review-table td {
+    padding: 11px 10px;
+    vertical-align: top;
+  }
+
+  .review-table td:first-child {
+    font-weight: 700;
+    color: var(--muted);
+    width: 38%;
+    white-space: nowrap;
+  }
+
+  .review-table td:last-child {
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  /* ─── BUTTONS ─── */
+  .btn-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2rem;
+    gap: 12px;
+  }
+
+  .btn {
+    padding: 12px 30px;
+    border-radius: 10px;
+    font-family: 'Tajawal', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .btn-primary {
+    background: var(--gradient);
+    color: white;
+    box-shadow: 0 4px 14px rgba(13,33,55,0.25);
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(13,33,55,0.3);
+  }
+
+  .btn-primary:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  .btn-outline {
+    background: transparent;
+    border: 2px solid var(--border);
+    color: var(--muted);
+  }
+
+  .btn-outline:hover {
+    border-color: var(--secondary);
+    color: var(--secondary);
+  }
+
+  .btn-accent {
+    background: linear-gradient(135deg, var(--accent), #d4842a);
+    color: white;
+    box-shadow: 0 4px 14px rgba(232,160,69,0.35);
+  }
+
+  .btn-accent:hover {
+    transform: translateY(-1px);
+  }
+
+  .btn-success {
+    background: linear-gradient(135deg, var(--accent2), #37a069);
+    color: white;
+    box-shadow: 0 4px 14px rgba(76,175,130,0.35);
+  }
+
+  /* ─── LOADING ─── */
+  .loading-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(13,33,55,0.7);
+    z-index: 999;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .loading-overlay.show { display: flex; }
+
+  .spinner {
+    width: 64px;
+    height: 64px;
+    border: 5px solid rgba(255,255,255,0.2);
+    border-top-color: var(--accent);
+    border-radius: 50%;
+    animation: spin 0.9s linear infinite;
+  }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .loading-text {
+    color: white;
+    font-size: 18px;
+    font-weight: 700;
+    text-align: center;
+  }
+
+  .loading-sub {
+    color: rgba(255,255,255,0.65);
+    font-size: 13px;
+    text-align: center;
+  }
+
+  /* ─── SUCCESS PAGE ─── */
+  .success-box {
+    text-align: center;
+    padding: 2rem 1rem;
+  }
+
+  .success-icon {
+    width: 90px;
+    height: 90px;
+    background: linear-gradient(135deg, var(--accent2), #37a069);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 42px;
+    margin: 0 auto 1.5rem;
+    box-shadow: 0 8px 24px rgba(76,175,130,0.3);
+    animation: popIn 0.5s cubic-bezier(0.34,1.56,0.64,1);
+  }
+
+  @keyframes popIn {
+    from { transform: scale(0); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+
+  .success-title {
+    font-size: 26px;
+    font-weight: 900;
+    color: var(--primary);
+    margin-bottom: 10px;
+  }
+
+  .success-sub {
+    font-size: 15px;
+    color: var(--muted);
+    margin-bottom: 2rem;
+    line-height: 1.7;
+  }
+
+  .slide-preview-list {
+    text-align: right;
+    background: var(--light);
+    border-radius: 12px;
+    padding: 1.2rem 1.5rem;
+    margin-bottom: 2rem;
+    max-height: 280px;
+    overflow-y: auto;
+  }
+
+  .slide-preview-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 14px;
+  }
+
+  .slide-preview-item:last-child { border-bottom: none; }
+
+  .slide-num {
+    background: var(--secondary);
+    color: white;
+    border-radius: 6px;
+    padding: 2px 9px;
+    font-size: 12px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .slide-type-badge {
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-weight: 600;
+    flex-shrink: 0;
+  }
+
+  .badge-title { background: rgba(13,33,55,0.1); color: var(--primary); }
+  .badge-section { background: rgba(30,95,138,0.12); color: var(--secondary); }
+  .badge-content { background: rgba(232,160,69,0.12); color: #b8720a; }
+  .badge-activity { background: rgba(76,175,130,0.12); color: #2d7a55; }
+  .badge-summary { background: rgba(224,82,82,0.1); color: #b83333; }
+
+  /* ─── AXES INPUT ─── */
+  .axes-list { display: flex; flex-direction: column; gap: 8px; }
+
+  .axis-item {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .axis-item input {
+    flex: 1;
+    padding: 10px 14px;
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    font-family: 'Tajawal', sans-serif;
+    font-size: 14px;
+    color: var(--text);
+    background: #fafcff;
+    outline: none;
+    transition: border 0.2s;
+    direction: rtl;
+  }
+
+  .axis-item input:focus {
+    border-color: var(--secondary);
+    box-shadow: 0 0 0 3px rgba(30,95,138,0.12);
+  }
+
+  .btn-remove-axis {
+    background: none;
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
+    color: var(--muted);
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    flex-shrink: 0;
+  }
+
+  .btn-remove-axis:hover { border-color: var(--danger); color: var(--danger); }
+
+  .btn-add-axis {
+    background: none;
+    border: 2px dashed var(--border);
+    border-radius: 10px;
+    padding: 9px 16px;
+    cursor: pointer;
+    color: var(--secondary);
+    font-family: 'Tajawal', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.2s;
+    width: 100%;
+    text-align: center;
+    margin-top: 4px;
+  }
+
+  .btn-add-axis:hover { border-color: var(--secondary); background: var(--light); }
+
+  /* ─── HIDDEN STEPS ─── */
+  .step-section { display: none; }
+  .step-section.active { display: block; }
+
+  /* RESPONSIVE */
+  @media (max-width: 600px) {
+    main { padding: 0 0.8rem 3rem; }
+    .card { padding: 1.4rem 1.2rem; }
+    .grid-2 { grid-template-columns: 1fr; }
+    .style-grid { grid-template-columns: 1fr 1fr; }
+    .lang-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="logo-area">
+    <img src="logo.png" alt="شعار مركز ارتقاء" class="logo-img" id="logoImg" />
+    <div class="logo-text">
+      <span>مركز ارتقاء</span>
+      <span>للتنمية المجتمعية</span>
+    </div>
+  </div>
+  <div class="header-title">🎓 منشئ الحقائب التدريبية</div>
+</header>
+
+<!-- LOADING OVERLAY -->
+<div class="loading-overlay" id="loadingOverlay">
+  <div class="spinner"></div>
+  <div class="loading-text">جارٍ إنشاء الحقيبة التدريبية...</div>
+  <div class="loading-sub">يقوم Claude بتوليد محتوى الشرائح، يرجى الانتظار</div>
+</div>
+
+<main>
+
+  <!-- PROGRESS BAR -->
+  <div class="steps-bar" id="stepsBar">
+    <div class="step-item active" data-step="1">
+      <div class="step-circle">1</div>
+      <div class="step-label">المعلومات الأساسية</div>
+    </div>
+    <div class="step-item" data-step="2">
+      <div class="step-circle">2</div>
+      <div class="step-label">الفئة المستهدفة</div>
+    </div>
+    <div class="step-item" data-step="3">
+      <div class="step-circle">3</div>
+      <div class="step-label">المحاور</div>
+    </div>
+    <div class="step-item" data-step="4">
+      <div class="step-circle">4</div>
+      <div class="step-label">الإعدادات</div>
+    </div>
+    <div class="step-item" data-step="5">
+      <div class="step-circle">5</div>
+      <div class="step-label">المراجعة</div>
+    </div>
+    <div class="step-item" data-step="6">
+      <div class="step-circle">✓</div>
+      <div class="step-label">النتيجة</div>
+    </div>
+  </div>
+
+  <!-- STEP 1: Basic Info -->
+  <div class="step-section active" id="step1">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon">📋</div>
+        <div class="card-header-text">
+          <h2>المعلومات الأساسية</h2>
+          <p>أدخل عنوان الحقيبة والملاحظات العامة</p>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>عنوان الحقيبة التدريبية <span class="req">*</span></label>
+        <input type="text" id="title" placeholder="مثال: مهارات التواصل الفعّال" />
+      </div>
+
+      <div class="field">
+        <label>الملاحظات والتوجيهات الخاصة</label>
+        <textarea id="notes" placeholder="أضف أي توجيهات أو ملاحظات تريد مراعاتها عند إنشاء الحقيبة..."></textarea>
+        <div class="field-hint">اختياري – مثل: التركيز على الجانب العملي، أو تضمين أنشطة تفاعلية</div>
+      </div>
+
+      <div class="btn-row">
+        <div></div>
+        <button class="btn btn-primary" onclick="goStep(2)">التالي ← الفئة المستهدفة</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 2: Target Audience -->
+  <div class="step-section" id="step2">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon">👥</div>
+        <div class="card-header-text">
+          <h2>الفئة المستهدفة</h2>
+          <p>حدد خصائص المشاركين في الحقيبة</p>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="field">
+          <label>الفئة العمرية <span class="req">*</span></label>
+          <select id="targetAge">
+            <option value="">-- اختر --</option>
+            <option>6 – 12 سنة (أطفال)</option>
+            <option>13 – 17 سنة (مراهقون)</option>
+            <option>18 – 25 سنة (شباب)</option>
+            <option>25 – 40 سنة (بالغون)</option>
+            <option>40+ سنة (كبار)</option>
+            <option>جميع الأعمار</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>الجنس <span class="req">*</span></label>
+          <select id="targetGender">
+            <option value="">-- اختر --</option>
+            <option>ذكور</option>
+            <option>إناث</option>
+            <option>مختلط (ذكور وإناث)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>بيئة المشاركين <span class="req">*</span></label>
+        <select id="targetEnv">
+          <option value="">-- اختر --</option>
+          <option>طلاب مدارس</option>
+          <option>طلاب جامعيون</option>
+          <option>موظفو قطاع حكومي</option>
+          <option>موظفو قطاع خاص</option>
+          <option>متطوعون ومجتمع مدني</option>
+          <option>رواد أعمال</option>
+          <option>أسر ومجتمعات محلية</option>
+          <option>مختلط</option>
+        </select>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn btn-outline" onclick="goStep(1)">← رجوع</button>
+        <button class="btn btn-primary" onclick="goStep(3)">التالي ← المحاور</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 3: Axes -->
+  <div class="step-section" id="step3">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon">🗂️</div>
+        <div class="card-header-text">
+          <h2>محاور الحقيبة</h2>
+          <p>أضف المحاور الرئيسية التي ستغطيها الحقيبة</p>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>المحاور الرئيسية <span class="req">*</span></label>
+        <div class="axes-list" id="axesList">
+          <div class="axis-item">
+            <input type="text" placeholder="المحور الأول" />
+            <button class="btn-remove-axis" onclick="removeAxis(this)" title="حذف">✕</button>
+          </div>
+          <div class="axis-item">
+            <input type="text" placeholder="المحور الثاني" />
+            <button class="btn-remove-axis" onclick="removeAxis(this)" title="حذف">✕</button>
+          </div>
+        </div>
+        <button class="btn-add-axis" onclick="addAxis()">+ إضافة محور جديد</button>
+        <div class="field-hint">أضف من 1 إلى 6 محاور رئيسية</div>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn btn-outline" onclick="goStep(2)">← رجوع</button>
+        <button class="btn btn-primary" onclick="goStep(4)">التالي ← الإعدادات</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 4: Settings -->
+  <div class="step-section" id="step4">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon">⚙️</div>
+        <div class="card-header-text">
+          <h2>إعدادات الحقيبة</h2>
+          <p>حدد عدد الشرائح والأسلوب واللغة</p>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>عدد الشرائح المطلوبة (الحد الأقصى 15)</label>
+        <div class="slides-count-wrap">
+          <input type="range" id="slidesRange" min="5" max="15" value="10"
+            oninput="updateSlidesCount(this.value)" />
+          <div class="count-badge" id="slidesCountBadge">10</div>
+        </div>
+        <div class="field-hint">يوصى بـ 8–12 شريحة للحقائب التدريبية الفعّالة</div>
+      </div>
+
+      <div class="field">
+        <label>نمط وأسلوب الحقيبة <span class="req">*</span></label>
+        <div class="style-grid" id="styleGrid">
+          <div class="style-card selected" onclick="selectStyle(this,'أكاديمي رسمي')">
+            <div class="style-icon">🎓</div>
+            <div class="style-name">أكاديمي رسمي</div>
+            <div class="style-desc">منهجي ومرجعي</div>
+          </div>
+          <div class="style-card" onclick="selectStyle(this,'تفاعلي عملي')">
+            <div class="style-icon">⚡</div>
+            <div class="style-name">تفاعلي عملي</div>
+            <div class="style-desc">أنشطة وتطبيقات</div>
+          </div>
+          <div class="style-card" onclick="selectStyle(this,'قصصي سردي')">
+            <div class="style-icon">📖</div>
+            <div class="style-name">قصصي سردي</div>
+            <div class="style-desc">حكايات وأمثلة</div>
+          </div>
+          <div class="style-card" onclick="selectStyle(this,'تحفيزي إلهامي')">
+            <div class="style-icon">🔥</div>
+            <div class="style-name">تحفيزي إلهامي</div>
+            <div class="style-desc">دافعية وتأثير</div>
+          </div>
+          <div class="style-card" onclick="selectStyle(this,'تحليلي منطقي')">
+            <div class="style-icon">📊</div>
+            <div class="style-name">تحليلي منطقي</div>
+            <div class="style-desc">بيانات وتحليل</div>
+          </div>
+          <div class="style-card" onclick="selectStyle(this,'مجتمعي توعوي')">
+            <div class="style-icon">🌱</div>
+            <div class="style-name">مجتمعي توعوي</div>
+            <div class="style-desc">توعية وتمكين</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>لغة الحقيبة <span class="req">*</span></label>
+        <div class="lang-grid">
+          <div class="lang-card selected" onclick="selectLang(this,'العربية')">
+            <div class="lang-flag">🇸🇦</div>
+            <div class="lang-name">العربية</div>
+          </div>
+          <div class="lang-card" onclick="selectLang(this,'الإنجليزية')">
+            <div class="lang-flag">🇬🇧</div>
+            <div class="lang-name">الإنجليزية</div>
+          </div>
+          <div class="lang-card" onclick="selectLang(this,'ثنائية اللغة')">
+            <div class="lang-flag">🌐</div>
+            <div class="lang-name">ثنائية اللغة</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn btn-outline" onclick="goStep(3)">← رجوع</button>
+        <button class="btn btn-primary" onclick="goStep(5)">التالي ← المراجعة</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 5: Review -->
+  <div class="step-section" id="step5">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon">🔍</div>
+        <div class="card-header-text">
+          <h2>مراجعة البيانات</h2>
+          <p>تأكد من صحة المعلومات قبل الإنشاء</p>
+        </div>
+      </div>
+
+      <table class="review-table" id="reviewTable"></table>
+
+      <div class="btn-row">
+        <button class="btn btn-outline" onclick="goStep(4)">← تعديل</button>
+        <button class="btn btn-accent" onclick="generatePresentation()">
+          🚀 إنشاء الحقيبة الآن
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 6: Result -->
+  <div class="step-section" id="step6">
+    <div class="card">
+      <div class="success-box">
+        <div class="success-icon">🎉</div>
+        <div class="success-title">تم إنشاء الحقيبة بنجاح!</div>
+        <div class="success-sub" id="successSub"></div>
+
+        <div class="slide-preview-list" id="slidePreviewList"></div>
+
+        <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+          <button class="btn btn-success" id="downloadBtn" onclick="downloadPPTX()">
+            ⬇️ تحميل ملف PowerPoint
+          </button>
+          <button class="btn btn-outline" onclick="resetAll()">
+            🔄 إنشاء حقيبة جديدة
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<script>
+// ─── STATE ───────────────────────────────────────────
+let currentStep = 1;
+let selectedStyle = 'أكاديمي رسمي';
+let selectedLang = 'العربية';
+let generatedSlides = [];
+let formData = {};
+
+const API_KEY = null; // المفتاح محفوظ بأمان في السيرفر
+
+// ─── LOGO ─────────────────────────────────────────────
+// Load logo from same directory
+const logoImg = document.getElementById('logoImg');
+logoImg.onerror = () => { logoImg.style.display = 'none'; };
+
+// ─── STEP NAVIGATION ─────────────────────────────────
+function goStep(n) {
+  if (n > currentStep && !validateStep(currentStep)) return;
+
+  document.querySelectorAll('.step-section').forEach(s => s.classList.remove('active'));
+  document.getElementById('step' + n).classList.add('active');
+
+  document.querySelectorAll('.step-item').forEach(item => {
+    const s = parseInt(item.dataset.step);
+    item.classList.remove('active', 'done');
+    if (s < n) item.classList.add('done');
+    else if (s === n) item.classList.add('active');
+  });
+
+  if (n === 5) buildReviewTable();
+  currentStep = n;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function validateStep(step) {
+  if (step === 1) {
+    const title = document.getElementById('title').value.trim();
+    if (!title) { alert('يرجى إدخال عنوان الحقيبة'); return false; }
+  }
+  if (step === 2) {
+    const age = document.getElementById('targetAge').value;
+    const gender = document.getElementById('targetGender').value;
+    const env = document.getElementById('targetEnv').value;
+    if (!age || !gender || !env) { alert('يرجى تحديد جميع خصائص الفئة المستهدفة'); return false; }
+  }
+  if (step === 3) {
+    const axes = getAxes();
+    if (axes.length === 0 || axes.every(a => !a.trim())) {
+      alert('يرجى إدخال محور واحد على الأقل'); return false;
+    }
+  }
+  return true;
+}
+
+// ─── AXES ─────────────────────────────────────────────
+function addAxis() {
+  const list = document.getElementById('axesList');
+  const items = list.querySelectorAll('.axis-item');
+  if (items.length >= 6) { alert('الحد الأقصى 6 محاور'); return; }
+  const div = document.createElement('div');
+  div.className = 'axis-item';
+  div.innerHTML = `<input type="text" placeholder="محور جديد" /><button class="btn-remove-axis" onclick="removeAxis(this)" title="حذف">✕</button>`;
+  list.appendChild(div);
+}
+
+function removeAxis(btn) {
+  const items = document.querySelectorAll('#axesList .axis-item');
+  if (items.length <= 1) { alert('يجب أن يبقى محور واحد على الأقل'); return; }
+  btn.parentElement.remove();
+}
+
+function getAxes() {
+  return Array.from(document.querySelectorAll('#axesList .axis-item input'))
+    .map(i => i.value.trim()).filter(v => v);
+}
+
+// ─── STYLE / LANG ─────────────────────────────────────
+function selectStyle(el, name) {
+  document.querySelectorAll('#styleGrid .style-card').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+  selectedStyle = name;
+}
+
+function selectLang(el, name) {
+  document.querySelectorAll('.lang-card').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+  selectedLang = name;
+}
+
+function updateSlidesCount(v) {
+  document.getElementById('slidesCountBadge').textContent = v;
+  const range = document.getElementById('slidesRange');
+  const pct = ((v - range.min) / (range.max - range.min)) * 100;
+  range.style.background = `linear-gradient(to left, var(--secondary) ${pct}%, var(--border) ${pct}%)`;
+}
+
+// ─── REVIEW TABLE ─────────────────────────────────────
+function buildReviewTable() {
+  const axes = getAxes();
+  const rows = [
+    ['عنوان الحقيبة', document.getElementById('title').value],
+    ['الفئة العمرية', document.getElementById('targetAge').value],
+    ['الجنس', document.getElementById('targetGender').value],
+    ['البيئة', document.getElementById('targetEnv').value],
+    ['المحاور', axes.map((a, i) => `${i + 1}. ${a}`).join('<br>')],
+    ['الملاحظات', document.getElementById('notes').value || 'لا توجد ملاحظات'],
+    ['عدد الشرائح', document.getElementById('slidesRange').value],
+    ['النمط', selectedStyle],
+    ['اللغة', selectedLang],
+  ];
+  const table = document.getElementById('reviewTable');
+  table.innerHTML = rows.map(([k, v]) =>
+    `<tr><td>${k}</td><td>${v}</td></tr>`
+  ).join('');
+}
+
+// ─── GENERATE ─────────────────────────────────────────
+async function generatePresentation() {
+  const axes = getAxes();
+  formData = {
+    title: document.getElementById('title').value.trim(),
+    targetAge: document.getElementById('targetAge').value,
+    targetGender: document.getElementById('targetGender').value,
+    targetEnv: document.getElementById('targetEnv').value,
+    axes: axes.join('، '),
+    notes: document.getElementById('notes').value.trim() || 'لا توجد ملاحظات خاصة',
+    slidesCount: document.getElementById('slidesRange').value,
+    style: selectedStyle,
+    language: selectedLang,
+  };
+
+  document.getElementById('loadingOverlay').classList.add('show');
+
+  try {
+    const prompt = `أنت خبير في تصميم الحقائب التدريبية. قم بإنشاء محتوى تفصيلي لحقيبة تدريبية بناءً على:
+
+عنوان الحقيبة: ${formData.title}
+الفئة المستهدفة: ${formData.targetAge}، ${formData.targetGender}، ${formData.targetEnv}
+محاور الحقيبة: ${formData.axes}
+الملاحظات: ${formData.notes}
+عدد الشرائح: ${formData.slidesCount} شريحة بالضبط
+نمط الحقيبة: ${formData.style}
+اللغة: ${formData.language}
+
+المطلوب: أنشئ محتوى ${formData.slidesCount} شريحة.
+أجب فقط بـ JSON دون أي نص إضافي أو backticks:
+{"slides":[{"slideNumber":1,"type":"title","title":"...","subtitle":"...","content":[],"notes":"..."},{"slideNumber":2,"type":"content","title":"...","subtitle":"","content":["...","..."],"notes":"..."}]}
+أنواع الشرائح: title, content, section, activity, summary
+الشريحة الأولى title والأخيرة summary. استخدم section لبداية كل محور رئيسي.`;
+
+    const res = await fetch('/api/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ prompt })
+    });
+    const data = await res.json();
+    const text = data.text;
+    const clean = text.replace(/```json|```/g, '').trim();
+    const parsed = JSON.parse(clean);
+    generatedSlides = parsed.slides;
+
+    document.getElementById('loadingOverlay').classList.remove('show');
+    showResult();
+  } catch (err) {
+    document.getElementById('loadingOverlay').classList.remove('show');
+    alert('حدث خطأ أثناء الإنشاء: ' + err.message);
+  }
+}
+
+// ─── SHOW RESULT ──────────────────────────────────────
+function showResult() {
+  goStep(6);
+
+  document.getElementById('successSub').textContent =
+    `تم إنشاء "${formData.title}" بـ ${generatedSlides.length} شريحة جاهزة للتحميل`;
+
+  const typeMap = {
+    title: ['عنوان', 'badge-title'],
+    section: ['قسم', 'badge-section'],
+    content: ['محتوى', 'badge-content'],
+    activity: ['نشاط', 'badge-activity'],
+    summary: ['خلاصة', 'badge-summary'],
+  };
+
+  const list = document.getElementById('slidePreviewList');
+  list.innerHTML = generatedSlides.map(s => {
+    const [label, cls] = typeMap[s.type] || ['محتوى', 'badge-content'];
+    return `<div class="slide-preview-item">
+      <span class="slide-num">${s.slideNumber}</span>
+      <span class="slide-type-badge ${cls}">${label}</span>
+      <span>${s.title}</span>
+    </div>`;
+  }).join('');
+}
+
+// ─── BUILD & DOWNLOAD PPTX ────────────────────────────
+async function downloadPPTX() {
+  const btn = document.getElementById('downloadBtn');
+  btn.disabled = true;
+  btn.textContent = '⏳ جارٍ بناء الملف...';
+
+  try {
+    const pres = new PptxGenJS();
+    pres.layout = 'LAYOUT_16x9';
+    pres.title = formData.title;
+    pres.rtlMode = true;
+
+    const C = {
+      primary: '0d2137', secondary: '1e5f8a', accent: 'e8a045',
+      accent2: '4CAF82', light: 'f0f4f8', white: 'FFFFFF',
+      dark: '1a2332', text: '2d3748', muted: '718096',
+    };
+
+    const mkShadow = () => ({ type: 'outer', blur: 8, offset: 3, angle: 135, color: '000000', opacity: 0.12 });
+
+    for (const slide of generatedSlides) {
+      const s = pres.addSlide();
+
+      if (slide.type === 'title') {
+        s.background = { color: C.primary };
+        s.addShape(pres.shapes.RECTANGLE, { x: 0, y: 0, w: 0.2, h: 5.625, fill: { color: C.accent } });
+        s.addShape(pres.shapes.OVAL, { x: 7, y: -0.5, w: 4.5, h: 4.5, fill: { color: C.secondary, transparency: 75 } });
+        s.addShape(pres.shapes.OVAL, { x: 8.5, y: 3.5, w: 2.5, h: 2.5, fill: { color: C.accent, transparency: 80 } });
+        s.addShape(pres.shapes.RECTANGLE, { x: 0.5, y: 1.55, w: 8.5, h: 0.07, fill: { color: C.accent } });
+        s.addText(slide.title, { x: 0.5, y: 1.7, w: 8.5, h: 1.3, fontSize: 34, bold: true, color: C.white, align: 'right', valign: 'middle', fontFace: 'Arial', rtlMode: true });
+        if (slide.subtitle) {
+          s.addText(slide.subtitle, { x: 0.5, y: 3.1, w: 8.5, h: 0.7, fontSize: 18, color: C.accent, align: 'right', fontFace: 'Arial', rtlMode: true });
+        }
+        s.addShape(pres.shapes.RECTANGLE, { x: 0, y: 4.9, w: 10, h: 0.725, fill: { color: C.secondary, transparency: 40 } });
+        s.addText(`${formData.targetGender} | ${formData.targetAge} | ${formData.targetEnv}`, { x: 0.5, y: 4.95, w: 9, h: 0.5, fontSize: 13, color: C.light, align: 'right', fontFace: 'Arial', rtlMode: true });
+        s.addText('مركز ارتقاء للتنمية المجتمعية', { x: 0.3, y: 0.15, w: 9.4, h: 0.5, fontSize: 11, color: C.muted, align: 'right', fontFace: 'Arial', rtlMode: true });
+
+      } else if (slide.type === 'section') {
+        s.background = { color: C.secondary };
+        s.addShape(pres.shapes.OVAL, { x: -1, y: 3, w: 5, h: 5, fill: { color: C.primary, transparency: 55 } });
+        s.addShape(pres.shapes.OVAL, { x: 7, y: -1, w: 4.5, h: 4.5, fill: { color: C.accent, transparency: 70 } });
+        s.addShape(pres.shapes.RECTANGLE, { x: 0.5, y: 2.5, w: 9, h: 0.07, fill: { color: C.accent } });
+        s.addText(slide.title, { x: 0.5, y: 1.5, w: 9, h: 1.2, fontSize: 30, bold: true, color: C.white, align: 'center', valign: 'middle', fontFace: 'Arial', rtlMode: true });
+        s.addShape(pres.shapes.OVAL, { x: 4.5, y: 3.7, w: 1, h: 1, fill: { color: C.accent } });
+        s.addText(`${slide.slideNumber}`, { x: 4.5, y: 3.7, w: 1, h: 1, fontSize: 20, bold: true, color: C.white, align: 'center', valign: 'middle', fontFace: 'Arial' });
+
+      } else if (slide.type === 'activity') {
+        s.background = { color: C.light };
+        s.addShape(pres.shapes.RECTANGLE, { x: 0, y: 0, w: 10, h: 1.1, fill: { color: C.accent2 } });
+        s.addText('نشاط تدريبي ⚡', { x: 0.4, y: 0.08, w: 9, h: 0.38, fontSize: 12, color: C.white, align: 'right', fontFace: 'Arial', rtlMode: true });
+        s.addText(slide.title, { x: 0.4, y: 0.38, w: 9, h: 0.62, fontSize: 20, bold: true, color: C.white, align: 'right', valign: 'middle', fontFace: 'Arial', rtlMode: true, margin: 0 });
+        s.addShape(pres.shapes.RECTANGLE, { x: 0.4, y: 1.25, w: 9.2, h: 3.9, fill: { color: C.white }, shadow: mkShadow() });
+        if (slide.content && slide.content.length > 0) {
+          const items = slide.content.map((item, i) => ({ text: item, options: { bullet: true, breakLine: i < slide.content.length - 1, color: C.text, rtlMode: true } }));
+          s.addText(items, { x: 0.6, y: 1.45, w: 8.8, h: 3.5, fontSize: 16, fontFace: 'Arial', align: 'right', valign: 'top', rtlMode: true });
+        }
+        s.addText(`${slide.slideNumber}`, { x: 9.3, y: 5.2, w: 0.5, h: 0.3, fontSize: 10, color: C.muted, align: 'center', fontFace: 'Arial' });
+
+      } else if (slide.type === 'summary') {
+        s.background = { color: C.dark };
+        s.addShape(pres.shapes.OVAL, { x: 5.5, y: 2, w: 6, h: 6, fill: { color: C.secondary, transparency: 80 } });
+        s.addShape(pres.shapes.RECTANGLE, { x: 0, y: 0, w: 0.2, h: 5.625, fill: { color: C.accent2 } });
+        s.addText('خلاصة الحقيبة', { x: 0.5, y: 0.2, w: 9, h: 0.5, fontSize: 13, color: C.accent2, align: 'right', fontFace: 'Arial', rtlMode: true });
+        s.addText(slide.title, { x: 0.5, y: 0.7, w: 9, h: 1, fontSize: 26, bold: true, color: C.white, align: 'right', fontFace: 'Arial', rtlMode: true });
+        s.addShape(pres.shapes.RECTANGLE, { x: 0.5, y: 1.75, w: 9, h: 0.05, fill: { color: C.accent } });
+        if (slide.content && slide.content.length > 0) {
+          const items = slide.content.map((item, i) => ({ text: item, options: { bullet: true, breakLine: i < slide.content.length - 1, color: 'f0f4f8', rtlMode: true } }));
+          s.addText(items, { x: 0.5, y: 1.9, w: 9, h: 3.2, fontSize: 16, fontFace: 'Arial', align: 'right', valign: 'top', rtlMode: true });
+        }
+        s.addText('مركز ارتقاء للتنمية المجتمعية', { x: 0.5, y: 5.15, w: 9, h: 0.35, fontSize: 10, color: C.muted, align: 'right', fontFace: 'Arial', rtlMode: true });
+
+      } else {
+        // content
+        s.background = { color: C.white };
+        s.addShape(pres.shapes.RECTANGLE, { x: 0, y: 0, w: 10, h: 1.05, fill: { color: C.primary } });
+        s.addShape(pres.shapes.RECTANGLE, { x: 0, y: 1.05, w: 10, h: 0.07, fill: { color: C.accent } });
+        s.addText(slide.title, { x: 0.4, y: 0.1, w: 9.2, h: 0.85, fontSize: 22, bold: true, color: C.white, align: 'right', valign: 'middle', fontFace: 'Arial', rtlMode: true, margin: 0 });
+        if (slide.content && slide.content.length > 0) {
+          const items = slide.content.map((item, i) => ({ text: item, options: { bullet: true, breakLine: i < slide.content.length - 1, color: C.text, rtlMode: true } }));
+          s.addText(items, { x: 0.4, y: 1.25, w: 9.2, h: 3.9, fontSize: 16, fontFace: 'Arial', align: 'right', valign: 'top', paraSpaceAfter: 5, rtlMode: true });
+        }
+        s.addShape(pres.shapes.RECTANGLE, { x: 0, y: 5.3, w: 10, h: 0.325, fill: { color: C.light } });
+        s.addText(formData.title, { x: 0.4, y: 5.33, w: 7.5, h: 0.27, fontSize: 9, color: C.muted, align: 'right', fontFace: 'Arial', rtlMode: true });
+        s.addText(`${slide.slideNumber}`, { x: 9.0, y: 5.33, w: 0.6, h: 0.27, fontSize: 10, color: C.secondary, align: 'center', bold: true, fontFace: 'Arial' });
+      }
+    }
+
+    await pres.writeFile({ fileName: `${formData.title}_حقيبة_تدريبية.pptx` });
+    btn.disabled = false;
+    btn.textContent = '⬇️ تحميل ملف PowerPoint';
+  } catch (err) {
+    btn.disabled = false;
+    btn.textContent = '⬇️ تحميل ملف PowerPoint';
+    alert('خطأ في بناء الملف: ' + err.message);
+  }
+}
+
+// ─── RESET ────────────────────────────────────────────
+function resetAll() {
+  document.getElementById('title').value = '';
+  document.getElementById('notes').value = '';
+  document.getElementById('targetAge').value = '';
+  document.getElementById('targetGender').value = '';
+  document.getElementById('targetEnv').value = '';
+  document.getElementById('slidesRange').value = 10;
+  updateSlidesCount(10);
+  document.querySelectorAll('#axesList .axis-item').forEach((el, i) => { if (i > 0) el.remove(); });
+  document.querySelector('#axesList input').value = '';
+  selectedStyle = 'أكاديمي رسمي';
+  selectedLang = 'العربية';
+  document.querySelectorAll('.style-card').forEach((c, i) => { c.classList.toggle('selected', i === 0); });
+  document.querySelectorAll('.lang-card').forEach((c, i) => { c.classList.toggle('selected', i === 0); });
+  generatedSlides = [];
+  goStep(1);
+}
+
+// ─── INIT ─────────────────────────────────────────────
+updateSlidesCount(10);
+</script>
+</body>
+</html>
